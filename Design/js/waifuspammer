@@ -1,0 +1,83 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const date = new Date();
+var current_hour = date.getHours();
+var current_min = date.getMinutes();
+var current_sec = date.getSeconds();
+var prefix='-';
+var user={};
+var a={};
+client.on('ready', () => {
+  console.log(`Bot: ${client.user.tag} ismiyle saat: ${current_hour}:${current_min}:${current_sec} da giriş yaptı`);
+});
+client.on('message', async msg => {
+  if (msg.author.id=='472141928578940958' && a[msg.channel.id]!=undefined) {
+	  var g=1;
+	  while(g<user[msg.channel.id].length){
+	  msg.channel.sendMessage('<@'+user[msg.channel.id][g]+'>');
+	  g++;
+	  }
+	  console.log(`WAİFU GELDİ`);
+	  //clearInterval(a[msg.channel.id]);
+	  delete a[msg.channel.id];
+	  return;
+  }else if(msg.author.id=='271394014358405121' && a[msg.channel.id]!=undefined){
+	  var g=1;
+	  while(g<user[msg.channel.id].length){
+	  msg.channel.sendMessage('<@'+user[msg.channel.id][g]+'>');
+	  g++;
+	  }
+	  console.log(`KUTU GELDİ`);
+	  //clearInterval(a[msg.channel.id]);
+	  delete a[msg.channel.id];
+	  return;
+  }else if (msg.content === '-start1') {
+	  if(user[msg.channel.id]==undefined){
+		user[msg.channel.id]=[0];
+	  }
+	  g=0;
+	while(g<user[msg.channel.id].length){
+		if(msg.member.id==user[msg.channel.id][g]){
+			break;
+		}else if(g==user[msg.channel.id].length-1){
+			user[msg.channel.id].push(msg.member.id);
+			g++;
+			break;
+		}
+	  g++;
+	  } 
+	  if(a[msg.channel.id]==undefined) {
+		a[msg.channel.id]=1;
+		var f=function(){
+			if(a[msg.channel.id]!=undefined) {
+				msg.channel.sendMessage('asd asdas dassd! +*--*- 5');
+				setTimeout(f,1500);
+			}
+		}
+		f();
+		//msg.channel.sendMessage('asd asdas dassd! +*--*- 5');
+		//a[msg.channel.id]=setInterval(function(){msg.channel.sendMessage('asd asdas dassd! +*--*- 5');},1500);
+	  }
+	console.log(`BAŞLADI`);	
+	return;
+  }else if (msg.content === '-stop1') {	
+	  if(a[msg.channel.id]!=undefined) {
+		//clearInterval(a[msg.channel.id]);
+		delete a[msg.channel.id];
+	  }
+	  console.log(`DURDU`);
+	  return;
+  }else if(msg.content === '-del1'){
+	 if(a[msg.channel.id]!=undefined){
+		//clearInterval(a[msg.channel.id]);
+		delete a[msg.channel.id]; 
+	 }
+	 if(user[msg.channel.id]!=undefined){
+		delete user[msg.channel.id];
+		user[msg.channel.id]=[0];
+	}
+	 console.log(`SİLDİ`);
+	 return;
+	}
+});
+client.login('NjkzMTc4NDIxNDc5NjA0Mjc0.Xn5S5g.3XDaztZRrOvlbrmPzOhdteKL4Wk');
